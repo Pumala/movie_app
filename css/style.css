@@ -1,3 +1,69 @@
-/*.inner-wrapper {
+body {
+  /*background-color: slateblue;*/
+}
+/*************************
+        CLEAR FIX
+*************************/
+.clear:before, .clear:after {
+  content: "";
+  display: table;
+}
+.clear:after {
+  clear: both;
+}
+/************************************
+        SEARCH FORM: All Pages
+************************************/
+
+#search_form input {
+  font-size: 1.25em;
+  float: left;
+  border-radius: 5px;
+  border: 1px solid grey;
+  padding: 5px;
+}
+#search_form .btn {
+  float: left;
+  margin-left: 5px;
+}
+
+/************************************
+        SEARCH FORM: HOME PAGE
+************************************/
+.home_search_form {
+  position: relative;
+  height: 50vh;
+  max-width: 350px;
+  margin: auto;
+}
+.home_search_form #search_form {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.home_search_form #search_form input {
+  width: 72%;
+}
+/************************************
+                NAVBAR
+************************************/
+.navbar {
+  border-radius: 0;
+  background-color: slateblue;
+  margin-bottom: 0;
+}
+.navbar-header .navbar-brand, .navbar-default .navbar-nav>li>a {
+  color: #fff;
+}
+.navbar-header {
+  position: absolute;
+}
+form.navbar-form.navbar-left.ng-pristine.ng-valid {
   text-align: center;
-}*/
+  float: none!important;
+}
+ul.nav.navbar-nav.navbar-right {
+  position: absolute;
+  right: 10px;
+  top: 0;
+}
