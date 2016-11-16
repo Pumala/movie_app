@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Movie App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" media="screen" title="no title">
+    <link rel="stylesheet" href="css/style.css" media="screen" title="no title">
+  </head>
+  <body ng-app="movie-app" ng-controller="MovieController">
+
+    <div class="container">
+
+      <div class="inner-wrapper">
+
+        <form ng-controller="SearchController" class="text-center" ng-submit="searchResults(currSearch)">
+          <input type="text" ng-model="currSearch" name="search" placeholder="search for a movie...">
+          <button type="submit" name="submit">Search</button>
+        </form>
+
+        <!-- this element below acts as a portal to the ui router -->
+        <ui-view></ui-view>
+
+      </div>
+
+    </div>
+
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/angular-ui-router.js"></script>
+    <script type="text/javascript" src="js/movieapp.js"></script>
+  </body>
+</html>

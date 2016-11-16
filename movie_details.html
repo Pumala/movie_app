@@ -1,0 +1,21 @@
+<ul>
+  <li>
+    Title: {{currMovie.title}}<br>
+    Release Date: {{currMovie.release_date}}<br>
+    Description: {{currMovie.overview}}<br>
+    Runtime: {{currMovie.runtime}} minutes
+  </li>
+  <h2>Genres:</h2>
+  <ul ng-repeat="genre in currMovie.genres">
+    <li>
+      {{genre.name}}
+    </li>
+  </ul>
+
+  <a ng-if="currMovie.homepage" href="{{currMovie.homepage}}">
+    <img src="https://image.tmdb.org/t/p/w500/{{currMovie.poster_path}}" alt="" />
+  </a>
+
+  <img ng-if="!currMovie.homepage" src="https://image.tmdb.org/t/p/w500/{{currMovie.poster_path}}" alt="" />
+
+</ul>
