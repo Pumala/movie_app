@@ -15,16 +15,18 @@ body {
         SEARCH FORM: All Pages
 ************************************/
 
-#search_form input {
+.search_form input {
   font-size: 1.25em;
   float: left;
   border-radius: 5px;
   border: 1px solid grey;
   padding: 5px;
+  margin-left: 5%;
 }
-#search_form .btn {
+.search_form .btn {
   float: left;
   margin-left: 5px;
+  margin-top: 2px;
 }
 
 /************************************
@@ -32,17 +34,17 @@ body {
 ************************************/
 .home_search_form {
   position: relative;
-  height: 50vh;
-  max-width: 350px;
+  height: 45vh;
+  max-width: 650px;
   margin: auto;
 }
-.home_search_form #search_form {
+.home_search_form .search_form {
   position: absolute;
   bottom: 0;
   width: 100%;
 }
-.home_search_form #search_form input {
-  width: 72%;
+.home_search_form .search_form input {
+  width: 65%;
 }
 /************************************
                 NAVBAR
@@ -55,15 +57,80 @@ body {
 .navbar-header .navbar-brand, .navbar-default .navbar-nav>li>a {
   color: #fff;
 }
-.navbar-header {
-  position: absolute;
-}
 form.navbar-form.navbar-left.ng-pristine.ng-valid {
+  display: none;
+}
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover,
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+  color: antiquewhite;
+}
+/************************************
+              MEDIA QUERIES
+************************************/
+@media screen and (min-width: 768px) {
+  ul.nav.navbar-nav.navbar-right {
+    position: absolute;
+    right: 10px;
+    top: 0;
+  }
+  form.navbar-form.navbar-left.ng-pristine.ng-valid, .navbar-left {
+    display: block;
+    text-align: center;
+    float: none!important;
+  }
+}
+/************************************
+          MOVIE RESULTS PAGE
+************************************/
+img {
+  width: 100%;
+}
+/*.movieResult {
+  float: left;*/
+  /*height: 380px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;*/
+/*}*/
+/*.noPosterMovieWrapper {
+  width: 100%;
+  background-color: blue;
+  height: 380px;*/
+  /*margin: 0 15px;
+  background-color: darkblue;*/
+/*}*/
+/*.noPosterMovie {*/
+  /*position: absolute;
+  top: 35%;
+  font-size: 1.75em;
+  left: 22%;
+  width: 150px;*/
+/*}*/
+
+
+
+
+
+/*.movieResultsWrapper {
+
+}*/
+/*.movieResult {
+  height: 380px;
+  overflow: hidden;
+  position: relative;
   text-align: center;
-  float: none!important;
 }
-ul.nav.navbar-nav.navbar-right {
+.noPosterMovieWrapper {
+  margin: 0 15px;
+  background-color: darkblue;
+}
+.noPosterMovie {
   position: absolute;
-  right: 10px;
-  top: 0;
-}
+  top: 35%;
+  font-size: 1.75em;
+  left: 22%;
+  width: 150px;
+}*/
+/*.movieResultsWrapper .movieTitle {
+
+}*/

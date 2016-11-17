@@ -1,13 +1,30 @@
-<h1>Hello</h1>
+<div class="container" ng-controller="SearchResultsController">
 
-<div ng-controller="SearchResultsController">
+  <h1>Search results for: {{search_keyword}}</h1>
 
-  <div ng-repeat="movie in searchResults.results">
-    <a ui-sref="movieDetails({movie_id: movie.id})">
-      <img ng-model="movie_poster" ng-if="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="" />
-    </a>
-    <a ui-sref="movieDetails({movie_id: movie.id})" ng-if="!movie_poster">{{movie.title}}</a>
-    <ui-view></ui-view>
+  <div class="clear movieResultsWrapper">
+    <div class="movieResult" ng-class="{noPosterMovieWrapper: !movie.poster_path}" ng-repeat="movie in searchResults.results">
+      <a ui-sref="movieDetails({movie_id: movie.id})">
+        <img ng-model="movie_poster" ng-if="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="" />
+      </a>
+      <a class="noPosterMovie" ui-sref="movieDetails({movie_id: movie.id})" ng-if="!movie.poster_path">{{movie.title}}</a>
+    </div>
   </div>
 
 </div>
+
+
+<!-- <div class="container" ng-controller="SearchResultsController">
+
+  <h1>Search results for: {{search_keyword}}</h1>
+
+  <div class="row movieResultsWrapper">
+    <div class="col-sm-6 movieResult" ng-class="{noPosterMovieWrapper: !movie.poster_path}" ng-repeat="movie in searchResults.results">
+      <a ui-sref="movieDetails({movie_id: movie.id})">
+        <img ng-model="movie_poster" ng-if="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="" />
+      </a>
+      <a class="noPosterMovie" ui-sref="movieDetails({movie_id: movie.id})" ng-if="!movie.poster_path">{{movie.title}}</a>
+    </div>
+  </div>
+
+</div> -->

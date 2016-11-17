@@ -5,8 +5,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
   .state({
     name: 'home',
     url: '/',
-    templateUrl: 'home.html',
-    controller: 'MovieController'
+    templateUrl: 'home.html'
+    // do not need
+    // controller: 'MovieController'
   })
   .state({
     name: 'search_results',
@@ -24,6 +25,24 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('/');
 
+});
+
+// app.run will always be running across all Pages
+// then you can inside app.run create a global variable
+// that is more versatile and accessible
+app.run(function($rootScope, $location) {
+  $rootScope.$on('$locationChangeStart', function(event, nextUrl, currentUrl) {
+    nextUrl = nextUrl.split("/");
+    console.log(nextUrl);
+    nextUrl = nextUrl[nextUrl.length - 1];
+    console.log(nextUrl);
+    if (nextUrl === "") {
+      $rootScope.is_homepage = false;
+    } else {
+      $rootScope.is_homepage = true;
+    }
+    console.log("RoostScope: " + $rootScope.is_homepage);
+  })
 });
 
 app.factory('MovieService', function($http) {
@@ -60,9 +79,11 @@ app.factory('MovieService', function($http) {
 
 // form controller
 app.controller('SearchController', function($scope, $stateParams, $http, MovieService, $location, $state) {
+  // $scope.is_homepage = false;
 
   $scope.searchResults = function(search_keyword) {
     // console.log(search_keyword);
+    // $scope.is_homepage = true;
     $state.go('search_results', {'search': search_keyword});
   }
 
@@ -71,6 +92,7 @@ app.controller('SearchController', function($scope, $stateParams, $http, MovieSe
 // search results controller
 app.controller('SearchResultsController', function($scope, $stateParams, $http, MovieService, $location, $state) {
   $scope.search_keyword = $stateParams.search;
+  // $scope.is_homepage = true;
 
   MovieService.searchResults($scope.search_keyword)
     .success(function(searchResults) {
@@ -96,7 +118,15 @@ app.controller('MovieDetailController', function($scope, $stateParams, $http, Mo
 })
 
 
-app.controller('MovieController', function($scope, $stateParams, $http, MovieService, $location) {
+// app.controller('MovieController', function($scope, $stateParams, $http, MovieService, $location) {
+  // $scope.is_homepage = true;
+// });
+
+
+
+
+
+
 // $scope.currMovieId = $stateParams.movie_id;
 
   // $scope.getSearchResults = function(search) {
@@ -116,7 +146,7 @@ app.controller('MovieController', function($scope, $stateParams, $http, MovieSer
   //     });
   // }
 
-});
+
 
 
 
