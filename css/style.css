@@ -67,7 +67,18 @@ form.navbar-form.navbar-left.ng-pristine.ng-valid {
 /************************************
               MEDIA QUERIES
 ************************************/
+.movieResultsWrapper .col-xs-6 {
+  padding: 0;
+}
+/*@media screen and (max-height: 550px) {
+  .movieResultsWrapper .col-xs-6 {
+    padding: 0;
+  }
+}*/
 @media screen and (min-width: 768px) {
+  .container {
+    width: 100%;
+  }
   ul.nav.navbar-nav.navbar-right {
     position: absolute;
     right: 10px;
@@ -84,6 +95,26 @@ form.navbar-form.navbar-left.ng-pristine.ng-valid {
 ************************************/
 img {
   width: 100%;
+}
+.search {
+  margin-top: 20px;
+}
+.movieResultsWrapper {
+  margin-top: 30px;
+}
+.keyword {
+  color: slateblue;
+}
+.movieResultsWrapper > *:nth-child(2n+1) {
+   clear: both;
+}
+.movieResult {
+  text-align: center;
+}
+.noPosterMovie {
+  margin-top: 50%;
+  display: block;
+  font-size: 2em;
 }
 /*.movieResult {
   float: left;*/
