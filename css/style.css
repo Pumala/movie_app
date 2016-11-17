@@ -58,37 +58,12 @@ body {
   color: #fff;
 }
 form.navbar-form.navbar-left.ng-pristine.ng-valid {
-  display: none;
+  /*display: none;*/
+  text-align: center;
 }
 .navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
   color: antiquewhite;
-}
-/************************************
-              MEDIA QUERIES
-************************************/
-.movieResultsWrapper .col-xs-6 {
-  padding: 0;
-}
-/*@media screen and (max-height: 550px) {
-  .movieResultsWrapper .col-xs-6 {
-    padding: 0;
-  }
-}*/
-@media screen and (min-width: 768px) {
-  .container {
-    width: 100%;
-  }
-  ul.nav.navbar-nav.navbar-right {
-    position: absolute;
-    right: 10px;
-    top: 0;
-  }
-  form.navbar-form.navbar-left.ng-pristine.ng-valid, .navbar-left {
-    display: block;
-    text-align: center;
-    float: none!important;
-  }
 }
 /************************************
           MOVIE RESULTS PAGE
@@ -116,6 +91,47 @@ img {
   display: block;
   font-size: 2em;
 }
+/************************************
+              MEDIA QUERIES
+************************************/
+.movieResultsWrapper .col-xs-6 {
+  padding: 0;
+}
+/*@media screen and (max-height: 550px) {
+  .movieResultsWrapper .col-xs-6 {
+    padding: 0;
+  }
+}*/
+@media screen and (min-width: 768px) {
+  /*.container {
+    width: 100%;
+  }*/
+  .movieResultsWrapper > *:nth-child(2n+1) {
+     clear: none;
+  }
+  .movieResultsWrapper > *:nth-child(3n+1) {
+     clear: both;
+  }
+  ul.nav.navbar-nav.navbar-right {
+    position: absolute;
+    right: 10px;
+    top: 0;
+  }
+  form.navbar-form.navbar-left.ng-pristine.ng-valid, .navbar-left {
+    display: block;
+    text-align: center;
+    float: none!important;
+  }
+}
+@media screen and (min-width: 992px) {
+  .movieResultsWrapper > *:nth-child(3n+1) {
+     clear: none;
+  }
+  .movieResultsWrapper > *:nth-child(4n+1) {
+     clear: both;
+  }
+}
+
 /*.movieResult {
   float: left;*/
   /*height: 380px;

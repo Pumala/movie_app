@@ -2,8 +2,8 @@
 
   <h1>Search results for: <span class="keyword">{{search_keyword}}</span></h1>
 
-  <div class="row clear movieResultsWrapper">
-    <div class="col-xs-6 movieResult" ng-class="{noPosterMovieWrapper: !movie.poster_path}" ng-repeat="movie in searchResults.results">
+  <div class="clear movieResultsWrapper">
+    <div class="col-xs-6 col-sm-4 col-md-3 movieResult" ng-class="{noPosterMovieWrapper: !movie.poster_path}" ng-repeat="movie in searchResults.results">
       <a ui-sref="movieDetails({movie_id: movie.id})" ng-if="movie.poster_path">
         <img ng-model="movie_poster" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="" />
       </a>
