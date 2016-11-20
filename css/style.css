@@ -71,6 +71,9 @@ form.navbar-form.navbar-left.ng-pristine.ng-valid {
 img {
   width: 100%;
 }
+.results {
+  margin-top: 30px;
+}
 .search {
   margin-top: 20px;
 }
@@ -90,6 +93,18 @@ img {
   margin-top: 50%;
   display: block;
   font-size: 2em;
+}
+/************************************
+          MOVIE DETAILS PAGE
+************************************/
+.movieDetails {
+  margin-top: 30px;
+}
+.detailsRow {
+  margin-top: 20px;
+}
+.detailsRow img {
+  max-width: 350px;
 }
 /************************************
               MEDIA QUERIES

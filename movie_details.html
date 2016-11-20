@@ -1,4 +1,51 @@
-<ul>
+<div class="movieDetails container">
+
+  <div class="text-center">
+    <h1>{{currMovie.title}}</h1>
+  </div>
+
+  <div class="row detailsRow">
+    <div class="col-xs-12 col-sm-6 text-center">
+      <a ng-if="currMovie.homepage" href="{{currMovie.homepage}}">
+        <img src="https://image.tmdb.org/t/p/w500/{{currMovie.poster_path}}" alt="" />
+      </a>
+
+      <img ng-if="!currMovie.homepage" src="https://image.tmdb.org/t/p/w500/{{currMovie.poster_path}}" alt="" />
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <p>
+        <strong>Release Date</strong>: {{currMovie.release_date}}<br>
+        <strong>Description</strong>: {{currMovie.overview}}<br>
+        <strong>Runtime</strong>: {{currMovie.runtime}} minutes
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+
+    </div>
+  </div>
+</div>
+
+
+<!-- <ul>
+  <li>
+    Title: {{currMovie.title}}<br>
+    Release Date: {{currMovie.release_date}}<br>
+    Description: {{currMovie.overview}}<br>
+    Runtime: {{currMovie.runtime}} minutes
+  </li>
+  <h2>Genres:</h2>
+  <ul ng-repeat="genre in currMovie.genres">
+    <li>
+      {{genre.name}}
+    </li>
+  </ul>
+
+</ul> -->
+
+<!-- <ul>
   <li>
     Title: {{currMovie.title}}<br>
     Release Date: {{currMovie.release_date}}<br>
@@ -18,4 +65,4 @@
 
   <img ng-if="!currMovie.homepage" src="https://image.tmdb.org/t/p/w500/{{currMovie.poster_path}}" alt="" />
 
-</ul>
+</ul> -->
