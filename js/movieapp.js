@@ -79,12 +79,11 @@ app.factory('MovieService', function($http) {
 
 // form controller
 app.controller('SearchController', function($scope, $stateParams, $http, MovieService, $location, $state) {
-  // $scope.is_homepage = false;
 
   $scope.searchResults = function(search_keyword) {
     // console.log(search_keyword);
-    // $scope.is_homepage = true;
     $state.go('search_results', {'search': search_keyword});
+    $scope.currSearch = "";
   }
 
 })

@@ -1,7 +1,15 @@
 <div class="movieDetails container">
 
   <div class="text-center">
-    <h1>{{currMovie.title}}</h1>
+    <!-- without filter -->
+    <!-- <h1>{{currMovie.title}} ({{currMovie.release_date.slice(0, 4)}})</h1> -->
+    <!-- with filter -->
+    <h1>
+      <strong>{{currMovie.title}}</strong>
+      <span class="text-muted" ng-if="currMovie.release_date">({{currMovie.release_date | date: 'yyyy'}})</span>
+      <span class="movie_rating"><i class="fa fa-star" aria-hidden="true"></i> {{currMovie.vote_average}}</span>
+    </h1>
+    <h3><em>{{currMovie.tagline}}</em></h3>
   </div>
 
   <div class="row detailsRow">
@@ -14,8 +22,16 @@
     </div>
     <div class="col-xs-12 col-sm-6">
       <p>
-        <strong>Release Date</strong>: {{currMovie.release_date}}<br>
-        <strong>Description</strong>: {{currMovie.overview}}<br>
+        <!-- w/o filter -->
+        <!-- <strong>Release Date</strong>: {{currMovie.release_date.slice(5)}}-{{currMovie.release_date.slice(0, 4)}}<br> -->
+        <!-- with filter -->
+        <span ng-if="currMovie.release_date"><strong>Release Date</strong>: {{currMovie.release_date | date: 'MM-dd-yyyy'}}</span>
+        <span ng-if="!currMovie.release_date"><strong>Release Date</strong>: N/A</span>
+      </p>
+      <p>
+        <strong>Description</strong>: {{currMovie.overview}}
+      </p>
+      <p>
         <strong>Runtime</strong>: {{currMovie.runtime}} minutes
       </p>
     </div>

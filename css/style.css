@@ -11,6 +11,12 @@ body {
 .clear:after {
   clear: both;
 }
+/*************************
+      STYLING CLASSES
+*************************/
+.text-muted {
+  color: grey;
+}
 /************************************
         SEARCH FORM: All Pages
 ************************************/
@@ -101,10 +107,13 @@ img {
   margin-top: 30px;
 }
 .detailsRow {
-  margin-top: 20px;
+  margin-top: 50px;
 }
 .detailsRow img {
-  max-width: 350px;
+  max-width: 300px;
+}
+.movie_rating {
+  font-size: .65em;
 }
 /************************************
               MEDIA QUERIES
