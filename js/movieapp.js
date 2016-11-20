@@ -11,7 +11,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
   })
   .state({
     name: 'search_results',
-    url: '/search',
+    url: '/search/{search}',
     params: {'search': null},
     templateUrl: 'search_results.html',
     controller: 'SearchResultsController'
@@ -49,9 +49,10 @@ app.factory('MovieService', function($http) {
   var service = {};
   var curr_api_key = '7468c53c297986faad9b295510465a46';
 
-  service.searchResults = function(search) {
+  service.searchResults = function(search_keyword) {
     var url = 'http://api.themoviedb.org/3/search/movie';
-    var curr_query = search;
+    var curr_query = search_keyword;
+    console.log(curr_query);
     return $http({
       method: 'GET',
       url: url,
@@ -90,8 +91,11 @@ app.controller('SearchController', function($scope, $stateParams, $http, MovieSe
 
 // search results controller
 app.controller('SearchResultsController', function($scope, $stateParams, $http, MovieService, $location, $state) {
-  $scope.search_keyword = $stateParams.search;
-  // $scope.is_homepage = true;
+  // $scope.search_keyword = $stateParams.search_keyword;
+  $scope.search_keyword = $stateParams['search']
+
+  console.log("SEARCH KEYWORD: ");
+  console.log($stateParams['search']);
 
   MovieService.searchResults($scope.search_keyword)
     .success(function(searchResults) {
