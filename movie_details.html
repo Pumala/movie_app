@@ -15,25 +15,27 @@
   <div class="row detailsRow">
     <div class="col-xs-12 col-sm-6 text-center">
       <a ng-if="currMovie.homepage" href="{{currMovie.homepage}}">
-        <img src="https://image.tmdb.org/t/p/w500/{{currMovie.poster_path}}" alt="" />
+        <img src="https://image.tmdb.org/t/p/w500/{{currMovie.backdrop_path}}" alt="" />
       </a>
 
-      <img ng-if="!currMovie.homepage" src="https://image.tmdb.org/t/p/w500/{{currMovie.poster_path}}" alt="" />
+      <img ng-if="!currMovie.homepage" src="https://image.tmdb.org/t/p/w500/{{currMovie.backdrop_path}}" alt="" />
     </div>
-    <div class="col-xs-12 col-sm-6">
-      <p>
-        <!-- w/o filter -->
-        <!-- <strong>Release Date</strong>: {{currMovie.release_date.slice(5)}}-{{currMovie.release_date.slice(0, 4)}}<br> -->
-        <!-- with filter -->
-        <span ng-if="currMovie.release_date"><strong>Release Date</strong>: {{currMovie.release_date | date: 'MM-dd-yyyy'}}</span>
-        <span ng-if="!currMovie.release_date"><strong>Release Date</strong>: N/A</span>
-      </p>
-      <p>
-        <strong>Description</strong>: {{currMovie.overview}}
-      </p>
-      <p>
-        <strong>Runtime</strong>: {{currMovie.runtime}} minutes
-      </p>
+    <div class="col-xs-12 col-sm-6 movieDetailsInfo">
+      <div class=">
+        <p>
+          <!-- w/o filter -->
+          <!-- <strong>Release Date</strong>: {{currMovie.release_date.slice(5)}}-{{currMovie.release_date.slice(0, 4)}}<br> -->
+          <!-- with filter -->
+          <span ng-if="currMovie.release_date"><strong>Release Date</strong>: {{currMovie.release_date | date: 'MM-dd-yyyy'}}</span>
+          <span ng-if="!currMovie.release_date"><strong>Release Date</strong>: N/A</span>
+        </p>
+        <p>
+          <strong>Description</strong>: {{currMovie.overview}}
+        </p>
+        <p>
+          <strong>Runtime</strong>: {{currMovie.runtime}} minutes
+        </p>
+      </div>
     </div>
   </div>
 

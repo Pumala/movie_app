@@ -11,8 +11,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
   })
   .state({
     name: 'search_results',
-    url: '/search/{search}',
-    params: {'search': null},
+    url: '/search/{search}/{page_number}',
+    params: {'search': null, 'page_number': null},
     templateUrl: 'search_results.html',
     controller: 'SearchResultsController'
   })
@@ -49,7 +49,7 @@ app.factory('MovieService', function($http) {
   var service = {};
   var curr_api_key = '7468c53c297986faad9b295510465a46';
 
-  service.searchResults = function(search_keyword) {
+  service.searchResults = function(search_keyword, curr_page_num) {
     var url = 'http://api.themoviedb.org/3/search/movie';
     var curr_query = search_keyword;
     console.log(curr_query);
@@ -58,7 +58,8 @@ app.factory('MovieService', function($http) {
       url: url,
       params: {
         api_key: curr_api_key,
-        query: curr_query
+        query: curr_query,
+        page: curr_page_num
       }
     });
   }
@@ -83,7 +84,7 @@ app.controller('SearchController', function($scope, $stateParams, $http, MovieSe
 
   $scope.searchResults = function(search_keyword) {
     // console.log(search_keyword);
-    $state.go('search_results', {'search': search_keyword});
+    $state.go('search_results', {'search': search_keyword, 'page_number': 1});
     $scope.currSearch = "";
   }
 
@@ -93,16 +94,35 @@ app.controller('SearchController', function($scope, $stateParams, $http, MovieSe
 app.controller('SearchResultsController', function($scope, $stateParams, $http, MovieService, $location, $state) {
   // $scope.search_keyword = $stateParams.search_keyword;
   $scope.search_keyword = $stateParams['search']
+  $scope.page_number = $stateParams['page_number']
 
   console.log("SEARCH KEYWORD: ");
   console.log($stateParams['search']);
 
-  MovieService.searchResults($scope.search_keyword)
+  MovieService.searchResults($scope.search_keyword, $scope.page_number)
     .success(function(searchResults) {
       $scope.searchResults = searchResults;
       // $location.path('/search');
-      console.log(searchResults);
+      console.log("Hellow there is something here...");
+      console.log($scope.searchResults);
+      $scope.total_pages = searchResults.total_pages;
+      $scope.total_results = searchResults.total_results;
+      console.log($scope.searchResults.total_pages);
+      $scope.searchResults.page = Number($scope.page_number);
+      console.log($scope.searchResults);
+
     })
+
+  $scope.showNextPageResults = function(condition) {
+    if (condition === 'subtract') {
+      $scope.page_number--;
+    } else {
+      $scope.page_number++;
+    }
+    console.log("Page Number? ");
+    console.log($scope.page_number)
+    $state.go('search_results', {'search_keyword': $scope.search_keyword, 'page_number': $scope.page_number});
+  }
 
 })
 

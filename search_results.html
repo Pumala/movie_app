@@ -2,12 +2,40 @@
 
   <h1>Search results for: <span class="keyword">{{search_keyword}}</span></h1>
 
+  <div class="clear">
+    <p class="pull-right showCurrPage">
+      Currently on page {{page_number}} of {{total_pages}}<br>
+      <span class="text-muted">({{total_results}} results)</span>
+    </p>
+  </div>
+
+  <div class="clear showPagesButtonDivs">
+    <div ng-show="page_number > 1" class="pull-left">
+      <i ng-click="showNextPageResults('subtract')" class="fa fa-arrow-circle-left fa-3x" aria-hidden="true"></i>
+    </div>
+    <div ng-show="page_number < 11" class="pull-right">
+      <i ng-click="showNextPageResults('add')" class="fa fa-arrow-circle-right fa-3x" aria-hidden="true"></i>
+    </div>
+  </div>
+  <!-- <div ng-click="showNextPageResults()" class="btn btn-primary">
+    More Results
+  </div> -->
+
   <div class="clear movieResultsWrapper">
-    <div class="col-xs-6 col-sm-4 col-md-3 movieResult" ng-class="{noPosterMovieWrapper: !movie.poster_path}" ng-repeat="movie in searchResults.results">
+    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 movieResult" ng-class="{noPosterMovieWrapper: !movie.poster_path}" ng-repeat="movie in searchResults.results">
       <a ui-sref="movieDetails({movie_id: movie.id})" ng-if="movie.poster_path">
         <img ng-model="movie_poster" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="" />
       </a>
       <a class="noPosterMovie" ui-sref="movieDetails({movie_id: movie.id})" ng-if="!movie.poster_path">{{movie.title}}</a>
+    </div>
+  </div>
+
+  <div class="clear showPagesButtonDivs">
+    <div ng-show="page_number > 1" class="pull-left">
+      <i ng-click="showNextPageResults('subtract')" class="fa fa-arrow-circle-left fa-3x" aria-hidden="true"></i>
+    </div>
+    <div ng-show="page_number < 11" class="pull-right">
+      <i ng-click="showNextPageResults('add')" class="fa fa-arrow-circle-right fa-3x" aria-hidden="true"></i>
     </div>
   </div>
 
