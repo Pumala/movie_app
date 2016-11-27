@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen" title="no title">
     <link rel="stylesheet" href="css/style.css" media="screen" title="no title">
   </head>
-  <body ng-app="movie-app">
+  <body ng-app="movie-app" >
 
     <nav class="navbar navbar-default">
       <div class="container-fluid">
@@ -20,47 +20,21 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">MovieApp</a>
+          <a class="navbar-brand" ui-sref="home">MovieApp</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Link</a></li> -->
-            <!-- <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li> -->
           </ul>
-          <!-- <div > -->
             <form class="navbar-form navbar-left" ng-controller="SearchController" ng-show="is_homepage" ng-submit="searchResults(currSearch)">
               <div class="form-group">
                 <input type="text" ng-model="currSearch" class="form-control" placeholder="search for a movie...">
               </div>
               <button type="submit" class="btn btn-default">Search</button>
             </form>
-          <!-- </div> -->
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Link</a></li>
-            <!-- <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-              </ul>
-            </li> -->
+            <li><a ui-sref="now_playing({'page_number': 1})">Now Playing</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
@@ -68,15 +42,6 @@
 
 
     <div>
-
-      <div class="home_search_form" ng-controller="SearchController" ng-hide="is_homepage">
-
-        <form class="search_form clear" ng-submit="searchResults(currSearch)">
-          <input type="text" ng-model="currSearch" name="search" placeholder="search for a movie...">
-          <button class="btn btn-primary" name="submit">Search</button>
-        </form>
-
-      </div>
 
       <!-- this element below acts as a portal to the ui router -->
       <ui-view></ui-view>

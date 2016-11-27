@@ -72,8 +72,9 @@ form.navbar-form.navbar-left.ng-pristine.ng-valid {
 /************************************
           MOVIE RESULTS PAGE
 ************************************/
-img {
+.movieResult img {
   width: 100%;
+  height: 100%;
 }
 .showPagesButtonDivs {
   margin: 20px 0;
@@ -114,7 +115,7 @@ img {
   /*margin-top: 50px;*/
 }
 .detailsRow img {
-  max-width: 500px;
+  width: 100%;
   margin: 30px 0 20px 0;
 }
 .movie_rating {
@@ -140,6 +141,7 @@ img {
     width: 240px;
     height: 360px;
     overflow: hidden;
+    background-color: #a1cacf;
   }
   .movieResultsWrapper > *:nth-child(2n+1) {
      clear: none;

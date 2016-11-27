@@ -22,6 +22,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'movie_details.html',
     controller: 'MovieDetailController'
   })
+  .state({
+    name: 'now_playing',
+    url: '/now_playing/{page_number}',
+    params: {'page_number': null},
+    templateUrl: 'now_playing.html',
+    controller: 'NowPlayingController'
+  })
 
   $urlRouterProvider.otherwise('/');
 
@@ -48,6 +55,19 @@ app.run(function($rootScope, $location) {
 app.factory('MovieService', function($http) {
   var service = {};
   var curr_api_key = '7468c53c297986faad9b295510465a46';
+
+  service.nowPlaying = function(curr_page_num) {
+    console.log('service page num', curr_page_num);
+    var url = 'https://api.themoviedb.org/3/movie/now_playing';
+    return $http({
+      method: 'GET',
+      url: url,
+      params: {
+        api_key: curr_api_key,
+        page: curr_page_num
+      }
+    });
+  }
 
   service.searchResults = function(search_keyword, curr_page_num) {
     var url = 'http://api.themoviedb.org/3/search/movie';
@@ -119,8 +139,6 @@ app.controller('SearchResultsController', function($scope, $stateParams, $http, 
     } else {
       $scope.page_number++;
     }
-    console.log("Page Number? ");
-    console.log($scope.page_number)
     $state.go('search_results', {'search_keyword': $scope.search_keyword, 'page_number': $scope.page_number});
   }
 
@@ -140,53 +158,32 @@ app.controller('MovieDetailController', function($scope, $stateParams, $http, Mo
 
 })
 
+// Now Playing Controller
+app.controller('NowPlayingController', function($scope, $stateParams, MovieService, $state) {
+  $scope.page_number = $stateParams['page_number'];
 
-// app.controller('MovieController', function($scope, $stateParams, $http, MovieService, $location) {
-  // $scope.is_homepage = true;
-// });
+  console.log($scope.page_number);
 
+  MovieService.nowPlaying($scope.page_number)
+    .success(function(currMovies) {
+      $scope.currMovies = currMovies;
+      $scope.total_pages = currMovies.total_pages;
+      $scope.total_results = currMovies.total_results;
+      $scope.currMovies.page = Number($scope.page_number);
+    })
 
+    $scope.showNextPageResults = function(condition) {
+      if (condition === 'subtract') {
+        $scope.page_number--;
+      } else {
+        $scope.page_number++;
+      }
+      $state.go('now_playing', {'page_number': $scope.page_number});
+    }
 
-
-
-
-// $scope.currMovieId = $stateParams.movie_id;
-
-  // $scope.getSearchResults = function(search) {
-  //   MovieService.searchResults(search)
-  //     .success(function(searchResults) {
-  //       $scope.searchResults = searchResults.movie_title;
-  //       $location.path('/search');
-  //       console.log(searchResults);
-  //     })
-  // }
-
-  // $scope.getMovieDetails = function() {
-  //   MovieService.movieDetails($scope.currMovieId)
-  //     .success(function(movie) {
-  //       $scope.currMovie = movie;
-  //       console.log(movie);
-  //     });
-  // }
+});
 
 
-
-
-
-// $scope.getSearchResults = function(search) {
-//   MovieService.searchResults(search)
-//     .success(function(searchResults) {
-//       $scope.searchResults = searchResults.movie_title;
-//       $location.path('/search');
-//       console.log(searchResults);
-//     })
-// }
-
-
-// $scope.getMovieDetails = function() {
-//   MovieService.movieDetails($scope.currMovieId)
-//     .success(function(movie) {
-//       $scope.currMovie = movie;
-//       console.log(movie);
-//     });
-// }
+app.controller('MovieController', function($scope, $stateParams, $http, MovieService, $location) {
+  $scope.is_homepage = true;
+});
