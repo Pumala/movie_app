@@ -100,10 +100,9 @@ app.factory('MovieService', function($http) {
 })
 
 // form controller
-app.controller('SearchController', function($scope, $stateParams, $http, MovieService, $location, $state) {
+app.controller('SearchController', function($scope, $stateParams, $http, MovieService, $state) {
 
   $scope.searchResults = function(search_keyword) {
-    // console.log(search_keyword);
     $state.go('search_results', {'search': search_keyword, 'page_number': 1});
     $scope.currSearch = "";
   }
@@ -184,6 +183,6 @@ app.controller('NowPlayingController', function($scope, $stateParams, MovieServi
 });
 
 
-app.controller('MovieController', function($scope, $stateParams, $http, MovieService, $location) {
-  $scope.is_homepage = true;
-});
+// app.controller('MovieController', function($scope, $stateParams, $http, MovieService, $location) {
+//   $scope.is_homepage = true;
+// });

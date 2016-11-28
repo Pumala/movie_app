@@ -17,9 +17,6 @@
       <i ng-click="showNextPageResults('add')" class="fa fa-arrow-circle-right fa-3x" aria-hidden="true"></i>
     </div>
   </div>
-  <!-- <div ng-click="showNextPageResults()" class="btn btn-primary">
-    More Results
-  </div> -->
 
   <div class="clear movieResultsWrapper">
     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 movieResult" ng-class="{noPosterMovieWrapper: !movie.poster_path}" ng-repeat="movie in currMovies.results">
@@ -30,14 +27,14 @@
     </div>
   </div>
 
-  <!-- <div class="clear showPagesButtonDivs">
+  <div class="clear showPagesButtonDivs">
     <div ng-show="page_number > 1" class="pull-left">
       <i ng-click="showNextPageResults('subtract')" class="fa fa-arrow-circle-left fa-3x" aria-hidden="true"></i>
     </div>
     <div ng-show="page_number < total_pages" class="pull-right">
       <i ng-click="showNextPageResults('add')" class="fa fa-arrow-circle-right fa-3x" aria-hidden="true"></i>
     </div>
-  </div> -->
+  </div>
 
 </div>
 

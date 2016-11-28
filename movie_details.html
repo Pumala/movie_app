@@ -15,10 +15,11 @@
   <div class="row detailsRow">
     <div class="col-xs-12 col-sm-6 text-center">
       <a ng-if="currMovie.homepage" href="{{currMovie.homepage}}">
-        <img src="https://image.tmdb.org/t/p/w500/{{currMovie.backdrop_path}}" alt="" />
+        <img src="https://image.tmdb.org/t/p/w500/{{currMovie.backdrop_path}}" alt="{{currMovie.title}} Poster" />
       </a>
 
-      <img ng-if="!currMovie.homepage" src="https://image.tmdb.org/t/p/w500/{{currMovie.backdrop_path}}" alt="" />
+      <img ng-if="!currMovie.homepage" src="https://image.tmdb.org/t/p/w500/{{currMovie.backdrop_path}}" alt="{{currMovie.title}} Poster" />
+
     </div>
     <div class="col-xs-12 col-sm-6 movieDetailsInfo">
       <div>

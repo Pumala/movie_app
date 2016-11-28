@@ -1,6 +1,6 @@
 <div class="results container" ng-controller="SearchResultsController">
 
-  <h1>Search results for: <span class="keyword">{{search_keyword}}</span></h1>
+  <h1>Search results for <span class="keyword">{{search_keyword}}</span></h1>
 
   <div class="clear">
     <p class="pull-right showCurrPage">
@@ -17,9 +17,6 @@
       <i ng-click="showNextPageResults('add')" class="fa fa-arrow-circle-right fa-3x" aria-hidden="true"></i>
     </div>
   </div>
-  <!-- <div ng-click="showNextPageResults()" class="btn btn-primary">
-    More Results
-  </div> -->
 
   <div class="clear movieResultsWrapper">
     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 movieResult" ng-class="{noPosterMovieWrapper: !movie.poster_path}" ng-repeat="movie in searchResults.results">

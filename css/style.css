@@ -32,7 +32,10 @@
   margin-left: 5px;
   margin-top: 2px;
 }
-
+.search_form input:focus {
+  box-shadow: 5px 2px 30px 4px #393e76;
+  outline: none;
+}
 /************************************
         SEARCH FORM: HOME PAGE
 ************************************/
@@ -55,8 +58,10 @@
 ************************************/
 .navbar {
   border-radius: 0;
-  background-color: slateblue;
   margin-bottom: 0;
+}
+.navbar, .btn-primary {
+  background-color: slateblue;
 }
 .navbar-header .navbar-brand, .navbar-default .navbar-nav>li>a {
   color: #fff;
@@ -69,9 +74,9 @@ form.navbar-form.navbar-left.ng-pristine.ng-valid {
 .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
   color: antiquewhite;
 }
-/************************************
-          MOVIE RESULTS PAGE
-************************************/
+/******************************************************
+          MOVIE RESULTS PAGE / NOW PLAYING PAGE
+******************************************************/
 .movieResult img {
   width: 100%;
   height: 100%;
@@ -82,6 +87,9 @@ form.navbar-form.navbar-left.ng-pristine.ng-valid {
 .showCurrPage {
   text-align: right;
 }
+.showPagesButtonDivs i {
+  cursor: pointer;
+}
 .results {
   margin-top: 30px;
 }
@@ -89,7 +97,7 @@ form.navbar-form.navbar-left.ng-pristine.ng-valid {
   margin-top: 20px;
 }
 .movieResultsWrapper {
-  margin-top: 30px;
+  margin: 30px auto;
 }
 .keyword {
   color: slateblue;
@@ -109,7 +117,7 @@ form.navbar-form.navbar-left.ng-pristine.ng-valid {
           MOVIE DETAILS PAGE
 ************************************/
 .movieDetails {
-  margin-top: 30px;
+  margin: 30px auto;
 }
 .detailsRow {
   /*margin-top: 50px;*/
@@ -188,53 +196,3 @@ form.navbar-form.navbar-left.ng-pristine.ng-valid {
      clear: both;
   }
 }
-
-/*.movieResult {
-  float: left;*/
-  /*height: 380px;
-  overflow: hidden;
-  position: relative;
-  text-align: center;*/
-/*}*/
-/*.noPosterMovieWrapper {
-  width: 100%;
-  background-color: blue;
-  height: 380px;*/
-  /*margin: 0 15px;
-  background-color: darkblue;*/
-/*}*/
-/*.noPosterMovie {*/
-  /*position: absolute;
-  top: 35%;
-  font-size: 1.75em;
-  left: 22%;
-  width: 150px;*/
-/*}*/
-
-
-
-
-
-/*.movieResultsWrapper {
-
-}*/
-/*.movieResult {
-  height: 380px;
-  overflow: hidden;
-  position: relative;
-  text-align: center;
-}
-.noPosterMovieWrapper {
-  margin: 0 15px;
-  background-color: darkblue;
-}
-.noPosterMovie {
-  position: absolute;
-  top: 35%;
-  font-size: 1.75em;
-  left: 22%;
-  width: 150px;
-}*/
-/*.movieResultsWrapper .movieTitle {
-
-}*/
