@@ -66,9 +66,9 @@ Afterward I created a simple search input field. I assigned the value of the inp
 
 This new state instantly calls a service from app.factory and passes it the search_keyword and page_number. However, before being able to pass it, the state grabs their values from stateParams and stores in into scope variables. The service makes an AJAX call to the search movies API and, upon success, returns the results back.
 
-Then I am able to work with this new data and use it to the render the pages. In the html files, I use the ng-repeat directive to loop through the results. For example, in the search pages, I loop through the movies and display their images. I also added additional logic here, that if there wasn't an image available, it would show the name of the movie instead.
+Then I am able to work with this new data and use it to the render the pages. In the html files, I use the ng-repeat directive to loop through the results. For example, in the search pages, I use ng-repeat to loop through the movies and display their images. I also added additional logic here, that if there wasn't a movie image available, it would show the name of the movie instead.
 
-Creating the other pages (movie details page and now playing page) was handled ver similarly to how the results page was created.
+Creating the other pages (movie details page and now playing page) was handled very similarly to how the results page was created.
 
 After creating the functionality, I then worked on creating a clean look.
 
