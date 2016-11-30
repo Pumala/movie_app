@@ -84,7 +84,54 @@ I then used these boolean values in my html files to display the correct search 
 
 ### Code Samples
 
+```
+// form controller: the movie search engine is accessible on all the pages
+// it has its own controller to be more versatile
+app.controller('SearchController', function($scope, $state) {
 
+  // the scope method takes in a search keyword that it will be searching for
+  $scope.searchResults = function(search_keyword) {
+    // state.go changes to a new state
+    // pass in the search keyword we are searching
+    // hard code the page number to 1 because it is the first page of the results
+    $state.go('search_results', {'search': search_keyword, 'page_number': 1});
+  }
+
+})
+```
+
+```
+// search results controller
+app.controller('SearchResultsController', function($scope, $stateParams, MovieService, $state) {
+  // grab the $stateParams values and save them to scope variables
+  $scope.search_keyword = $stateParams['search'];
+  $scope.page_number = Number($stateParams['page_number']);
+
+  // instantly call searchResults service and pass in the search keyword user is looking up,
+  // as well as the page number
+  MovieService.searchResults($scope.search_keyword, $scope.page_number)
+    // upon success, searchResults is return back
+    .success(function(searchResults) {
+      // save searchResults to a scope variable
+      $scope.searchResults = searchResults;
+      // save the total pages of results to a scope variable
+      $scope.total_pages = searchResults.total_pages;
+      // save the total number of results to a scope variable
+      $scope.total_results = searchResults.total_results;
+      //
+      // $scope.searchResults.page = Number($scope.page_number);
+    })
+
+    // this scope method takes in a condition and the current page number
+   // the condition is either 'subtract' or 'add'
+    $scope.showNextPageResults = function(condition) {
+      $scope.page_number = MovieService.showNextPageResults(condition, $scope.page_number);
+      // use $state.go to change states (pass in the search_keyword and page_number values)
+      $state.go('search_results', {'search_keyword': $scope.search_keyword, 'page_number': $scope.page_number});
+    }
+
+})
+```
 
 ### What To Do Next:
 
