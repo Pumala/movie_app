@@ -35,29 +35,31 @@ app.config(function($stateProvider, $urlRouterProvider) {
 });
 
 // app.run will always be running across all Pages
-// then you can inside app.run create a global variable
+// then inside app.run you can create a global variable
 // that is more versatile and accessible
 app.run(function($rootScope, $location) {
-  $rootScope.$on('$locationChangeStart', function(event, nextUrl, currentUrl) {
+  // $locationChangeStart has access to the new url that the user is changing to
+  $rootScope.$on('$locationChangeStart', function(event, nextUrl) {
+    // split the url
     nextUrl = nextUrl.split("/");
-    console.log(nextUrl);
+    // grab the last index of the url and check its value
     nextUrl = nextUrl[nextUrl.length - 1];
-    console.log(nextUrl);
+    // if there is nothing, then the url is not home
     if (nextUrl === "") {
       $rootScope.is_homepage = false;
     } else {
+      // if there is something else here, then the url is home
       $rootScope.is_homepage = true;
     }
-    console.log("RoostScope: " + $rootScope.is_homepage);
   })
 });
 
 app.factory('MovieService', function($http) {
+  // an object called service that stores all of app.factory's services
   var service = {};
   var curr_api_key = '7468c53c297986faad9b295510465a46';
 
   service.nowPlaying = function(curr_page_num) {
-    console.log('service page num', curr_page_num);
     var url = 'https://api.themoviedb.org/3/movie/now_playing';
     return $http({
       method: 'GET',
@@ -70,21 +72,31 @@ app.factory('MovieService', function($http) {
   }
 
   service.searchResults = function(search_keyword, curr_page_num) {
+    // the query we want to search is passed in as search_keyword
     var url = 'http://api.themoviedb.org/3/search/movie';
-    var curr_query = search_keyword;
-    console.log(curr_query);
+
     return $http({
       method: 'GET',
       url: url,
       params: {
         api_key: curr_api_key,
-        query: curr_query,
+        query: search_keyword,
         page: curr_page_num
       }
     });
   }
 
+  service.showNextPageResults = function(condition, page_number) {
+    if (condition === 'subtract') {
+      page_number--;
+    } else {
+      page_number++;
+    }
+    return page_number;
+  }
+
   service.movieDetails = function(movieId) {
+    // the movie id is passed in as movieId
     var url = 'http://api.themoviedb.org/3/movie/' + movieId;
     return $http({
       method: 'GET',
@@ -99,84 +111,84 @@ app.factory('MovieService', function($http) {
 
 })
 
-// form controller
-app.controller('SearchController', function($scope, $stateParams, $http, MovieService, $state) {
+// form controller: the movie search engine is accessible on all the pages
+// it has its own controller to be more versatile
+app.controller('SearchController', function($scope, $state) {
 
+  // the scope method takes in a search keyword that it will be searching for
   $scope.searchResults = function(search_keyword) {
+    // state.go changes to a new state
+    // pass in the search keyword we are searching
+    // hard code the page number to 1 because it is the first page of the results
     $state.go('search_results', {'search': search_keyword, 'page_number': 1});
-    $scope.currSearch = "";
   }
 
 })
 
 // search results controller
-app.controller('SearchResultsController', function($scope, $stateParams, $http, MovieService, $location, $state) {
-  // $scope.search_keyword = $stateParams.search_keyword;
-  $scope.search_keyword = $stateParams['search']
-  $scope.page_number = $stateParams['page_number']
+app.controller('SearchResultsController', function($scope, $stateParams, MovieService, $state) {
+  // grab the $stateParams values and save them to scope variables
+  $scope.search_keyword = $stateParams['search'];
+  $scope.page_number = Number($stateParams['page_number']);
 
-  console.log("SEARCH KEYWORD: ");
-  console.log($stateParams['search']);
-
+  // instantly call searchResults service and pass in the search keyword user is looking up,
+  // as well as the page number
   MovieService.searchResults($scope.search_keyword, $scope.page_number)
+    // upon success, searchResults is return back
     .success(function(searchResults) {
+      // save searchResults to a scope variable
       $scope.searchResults = searchResults;
-      // $location.path('/search');
-      console.log("Hellow there is something here...");
-      console.log($scope.searchResults);
+      // save the total pages of results to a scope variable
       $scope.total_pages = searchResults.total_pages;
+      // save the total number of results to a scope variable
       $scope.total_results = searchResults.total_results;
-      console.log($scope.searchResults.total_pages);
-      $scope.searchResults.page = Number($scope.page_number);
-      console.log($scope.searchResults);
-
+      //
+      // $scope.searchResults.page = Number($scope.page_number);
     })
 
-  $scope.showNextPageResults = function(condition) {
-    if (condition === 'subtract') {
-      $scope.page_number--;
-    } else {
-      $scope.page_number++;
+    // this scope method takes in a condition and the current page number
+   // the condition is either 'subtract' or 'add'
+    $scope.showNextPageResults = function(condition) {
+      $scope.page_number = MovieService.showNextPageResults(condition, $scope.page_number);
+      // use $state.go to change states (pass in the search_keyword and page_number values)
+      $state.go('search_results', {'search_keyword': $scope.search_keyword, 'page_number': $scope.page_number});
     }
-    $state.go('search_results', {'search_keyword': $scope.search_keyword, 'page_number': $scope.page_number});
-  }
 
 })
 
 // Movie Detail Controller
-app.controller('MovieDetailController', function($scope, $stateParams, $http, MovieService, $location, $state) {
+app.controller('MovieDetailController', function($scope, $stateParams, $http, MovieService) {
+  // grab the movie id from $stateParams
   $scope.movie_Id = $stateParams.movie_id;
 
-  console.log($scope.movie_Id);
-
+  // instantly calls movieDetails service
+  // pass in the movie id of the movie we are searching
   MovieService.movieDetails($scope.movie_Id)
     .success(function(movie) {
       $scope.currMovie = movie;
-      console.log(movie);
     });
 
 })
 
 // Now Playing Controller
 app.controller('NowPlayingController', function($scope, $stateParams, MovieService, $state) {
-  $scope.page_number = $stateParams['page_number'];
+  // grab the curr page number from stateParams and save it to a scope variable
+  $scope.page_number = Number($stateParams['page_number']);
 
-  console.log($scope.page_number);
-
+  // instantly call nowPlaying service and pass in the page_number
   MovieService.nowPlaying($scope.page_number)
+    // upon success, the results return as we catch it by naming it currMovies
     .success(function(currMovies) {
+      // save the result to a scope variable
       $scope.currMovies = currMovies;
+      // also, save the total results pages and number of results to scope variables
       $scope.total_pages = currMovies.total_pages;
       $scope.total_results = currMovies.total_results;
-      $scope.currMovies.page = Number($scope.page_number);
+      // $scope.currMovies.page = Number($scope.page_number);
     })
 
     $scope.showNextPageResults = function(condition) {
-      if (condition === 'subtract') {
-        $scope.page_number--;
-      } else {
-        $scope.page_number++;
-      }
+      $scope.page_number = MovieService.showNextPageResults(condition, $scope.page_number);
       $state.go('now_playing', {'page_number': $scope.page_number});
     }
 

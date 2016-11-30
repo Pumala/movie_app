@@ -82,6 +82,10 @@ I then used these boolean values in my html files to display the correct search 
 
 *** RootScope variables are not recommended. However, I think this was a good implementation of them. I am open-minded to using other options once I discover more ways of handling this problem.
 
+### Code Samples
+
+
+
 ### What To Do Next:
 
   * add more styling
