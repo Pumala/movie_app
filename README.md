@@ -133,7 +133,7 @@ app.controller('SearchResultsController', function($scope, $stateParams, MovieSe
 })
 ```
 
-### What To Do Next:
+### What To Do Next
 
   * add more styling
-  * make more API calls
+  * make more API calls and add more functionality
