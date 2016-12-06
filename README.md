@@ -6,7 +6,7 @@ create a movie search engine application using AngularJS, UI Router, Ajax, Angul
 ### Live Demo:
 
 TBD
-<!-- [MovieApp] (http://xmasblackjack.surge.sh/) -->
+[MovieApp] (http://iamclamclam.com/movie_app)
 
 ### Languages used:
 
